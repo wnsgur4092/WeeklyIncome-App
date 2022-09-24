@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct WeeklyIncomeApp: App {
+    @AppStorage("isOnboarding") var isOnboarding : Bool = true
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isOnboarding == true {
+                OnBoardingView()
+            } else {
+                ContentView()
+            }
         }
     }
 }
