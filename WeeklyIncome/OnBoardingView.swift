@@ -11,15 +11,15 @@ struct OnBoardingView: View {
     //MARK: - PROPERTIES
     
     @AppStorage("isOnboarding") var isOnboarding : Bool?
-    
+    @AppStorage("wage") var userWage : String = "20"
     @State var wage : String = ""
-    
-    //MARK: - FETCHING DATA
+
 
 
     //MARK: - FUNCTION
-
-
+    func saveWage(){
+        UserDefaults.standard.set(self.wage, forKey: "UserWage")
+    }
     
     //MARK: - BODY
     var body: some View {
@@ -27,7 +27,7 @@ struct OnBoardingView: View {
             Text("Please enter your hourly wage".uppercased())
             HStack(alignment: .center){
                 Text("$")
-                TextField("Wage", value: $wage, formatter: NumberFormatter())
+                TextField("Wage", text: $wage)
 
                     .padding()
                     .background(Color(UIColor.tertiarySystemFill))
@@ -35,9 +35,10 @@ struct OnBoardingView: View {
                     .frame(width: 80, height: 80, alignment: .center)
                 
             } //: HSTACK
-//            StartButtonView()
+            
+            //MARK: - BUTTON
             Button {
-//                saveWage()
+                saveWage()
                 isOnboarding = false
             } label: {
                 HStack(spacing : 8) {
@@ -54,6 +55,12 @@ struct OnBoardingView: View {
             .tint(.green)
             
         } //: VSTACK
+        .padding()
+        
+        
+        .cornerRadius(10)
+
+        
     }
 }
 

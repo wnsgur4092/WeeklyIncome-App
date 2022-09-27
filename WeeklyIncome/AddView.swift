@@ -12,7 +12,7 @@ struct AddView: View {
     @Environment(\.dismiss) var dismiss
     
     @Environment(\.managedObjectContext) private var viewContext
-        
+    
     @State private var startHour : String = "6"
     @State private var startMinute : String = "0"
     @State private var endHour : String = "6"
@@ -20,14 +20,18 @@ struct AddView: View {
     @State private var breakTime : String = "0"
     @State private var totalHour : String = "0"
     @State private var totalTime : String = "0"
-
-    var hours : [String] = ["6","7","8","9","10","11","12","13","14","15","16"]
+    
+    var hours : [String] = ["6","7","8","9","10","11","12","13","14","15","16","17"]
     var minutes : [String] = ["0", "15", "30", "45"]
+    
+    @State private var errorShowing : Bool = false
+    @State private var errorTitle : String = ""
+    @State private var errorMessage : String = ""
+    
     //MARK: - FETCHING DATA
-
+    
     
     //MARK: - FUNCTION
-    
     func calculator( startHour : String, startMinute : String, endHour: String, endMinute : String, breakTime : String) -> String {
         guard let startHourDouble = Double(startHour),
               let startMinuteDouble = Double(startMinute),
@@ -48,24 +52,38 @@ struct AddView: View {
     func addItem() {
         let totalTime = calculator(startHour: startHour, startMinute: startMinute, endHour: endHour, endMinute: endMinute, breakTime: breakTime)
         
-        let item =  Item(context: viewContext)
+        let totalTimeDouble = (totalTime as NSString).doubleValue
         
-        
-        item.totalTime = totalTime
-
-        do{
-            try viewContext.save()
-        } catch {
-            print(error)
+        if totalTimeDouble > 0 {
+            let item =  Item(context: viewContext)
+            item.totalTime = totalTime
+            
+            do{
+                try viewContext.save()
+            } catch {
+                print(error)
+            }
+            self.dismiss()
+            
+        } else {
+            self.errorShowing = true
+            self.errorTitle = "Invalid Total Time"
+            self.errorMessage = "Make sure to enter proper time"
         }
-        self.dismiss()
+        
         
     }
     
+    
+    
     //MARK: - BODY
     var body: some View {
-        VStack {
+        
+        VStack(spacing: 10) {
             Text("Start Time")
+                .font(.system(size:24, weight:.bold, design: .default))
+                .padding()
+                .foregroundColor(.green)
             HStack {
                 Picker("Start Hour", selection: $startHour) {
                     ForEach(hours, id:\.self) { item in
@@ -81,6 +99,9 @@ struct AddView: View {
             }
             
             Text("End Time")
+                .font(.system(size:24, weight:.bold, design: .default))
+                .padding()
+                .foregroundColor(.red)
             HStack {
                 Picker("End Hour", selection: $endHour) {
                     ForEach(hours, id:\.self) { item in
@@ -95,6 +116,8 @@ struct AddView: View {
                 }
             }
             Text("Break Time")
+                .font(.system(size:24, weight:.bold, design: .default))
+            
             Picker("Break", selection: $breakTime) {
                 ForEach(minutes, id:\.self) { item in
                     Text(item)
@@ -105,8 +128,8 @@ struct AddView: View {
             Text(calculator(startHour:startHour, startMinute:startMinute, endHour:endHour, endMinute: endMinute, breakTime: breakTime))
             
             Button {
-               addItem()
-
+                addItem()
+                
             } label: {
                 Text("Save")
                     .font(.system(size: 24, weight: .bold, design: .default))
@@ -115,9 +138,16 @@ struct AddView: View {
                     .background(Color.blue)
                     .cornerRadius(9)
                     .foregroundColor(.white)
+                    .padding()
             } //: SAVE BUTTON
+            
         } //: VSTACK
+        .alert(isPresented: $errorShowing) {
+            Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+        }
+        
     }
+    
 }
 
 //MARK: - PREVIEW

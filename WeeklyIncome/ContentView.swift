@@ -12,8 +12,16 @@ struct ContentView: View {
     //MARK: - PROPERTIES
     @State private var showingAddView : Bool = false
     @State private var showingWage : String = ""
-    var finalWage : String = ""
+    @State var savedWage : String = ""
+    @State private var timestamp = Date()
+    
+    private let itemFormatter: DateFormatter = {
+         let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            return formatter
 
+    }()
+    
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -41,34 +49,65 @@ struct ContentView: View {
         }
     }
     
+    func getWage(){
+        savedWage = "\(UserDefaults.standard.string(forKey: "UserWage") ?? "")"
+    }
+    
+    func wageCalculator( totalTime : String, hourlyWage : String) -> String {
+        guard let totalTimeDouble = Double(totalTime),
+              let hourlyWageDouble = Double(savedWage)
+             
+        else { return " " }
+        
+        let wagePerDay = totalTimeDouble * hourlyWageDouble
+
+        return "\(wagePerDay)"
+    }
+    
     
     //MARK: - BODY
     var body: some View {
-        VStack {
-//            Text(wage ?? "__")
-            List {
-                ForEach(self.items, id: \.self) { item in
-                    HStack {
-                        Text(item.totalTime ?? "")
-                    }
+        NavigationView {
+            VStack {
+                HStack{
+                    Text("Hourly Wage: ")
+                    Text("$ \(savedWage)")
                 }
-                .onDelete(perform: deleteItems)
-            }
-            
-            //: ADD BUTTON
-            Button {
-                self.showingAddView.toggle()
-
-            } label: {
-                Image(systemName: "plus")
-            }
-            .sheet(isPresented: $showingAddView) {
-                AddView()
+                List {
+                    ForEach(self.items, id: \.self) { item in
+                        HStack {
+                            Text(item.timestamp ?? Date.now, formatter: itemFormatter)
+                            Text(item.totalTime ?? "")
+                            Spacer()
+                            Text("$\(wageCalculator(totalTime: item.totalTime ?? "" ,hourlyWage: savedWage))")
+                            
+                        }
+                    }
+                    .onDelete(perform: deleteItems)
+                    
+                }
+                
+                
+                //: ADD BUTTON
+                Button {
+                    self.showingAddView.toggle()
+                    
+                } label: {
+                    Image(systemName: "plus")
+                }
+                
+                .sheet(isPresented: $showingAddView) {
+                    AddView()
+                    
+                }
                 
             }
-
-        }
-        .padding()
+            .padding()
+            .onAppear(perform: {
+                getWage()
+            })
+            .navigationTitle("Weekly Calendar")
+        } //: NAVIGATION VIEW
     }
 }
 

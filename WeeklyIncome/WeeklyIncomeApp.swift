@@ -19,10 +19,10 @@ struct WeeklyIncomeApp: App {
             if isOnboarding == true {
                 OnBoardingView()
             } else {
-
                 ContentView()
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
         }
     }
+    
 }
