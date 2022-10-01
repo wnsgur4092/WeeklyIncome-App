@@ -16,13 +16,8 @@ struct WeeklyIncomeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if isOnboarding == true {
-                OnBoardingView()
-            } else {
-                ContentView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            }
+            let vm = IncomeListViewModel()
+            IncomeListView(vm: vm )
         }
     }
-    
 }
