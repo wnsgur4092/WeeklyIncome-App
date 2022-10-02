@@ -10,6 +10,7 @@ import Foundation
 struct Income : Identifiable, Codable {
     var id = UUID()
     var date : String
+    var title : String
     var totalHour : String
     var todayIncome : String
 }
@@ -37,12 +38,12 @@ extension Income {
 //MARK: - Dummy Data
 extension Income {
     static let list : [Income] = [
-        Income(date: "2022-07-01", totalHour: "8.5", todayIncome: "200"),
+        Income(date: "2022-07-01", title: "LAB", totalHour: "8.5", todayIncome: "200"),
         
-        Income(date: "2022-08-01", totalHour: "8.5", todayIncome: "200"),
+        Income(date: "2022-08-01", title: "OliverBrown", totalHour: "8.5", todayIncome: "200"),
         
-        Income(date: "2022-09-01", totalHour: "8.5", todayIncome: "200"),
-        Income(date: "2022-09-03", totalHour: "9.0", todayIncome: "250"),
-        Income(date: "2022-09-25", totalHour: "10.0", todayIncome: "260")
+        Income(date: "2022-09-01", title: "LAB", totalHour: "8.5", todayIncome: "200"),
+        Income(date: "2022-09-03", title: "LAB", totalHour: "9.0", todayIncome: "250"),
+        Income(date: "2022-09-25", title: "LAB",totalHour: "10.0", todayIncome: "260")
     ]
 }

@@ -10,6 +10,9 @@
 		BF11CC9A28E189D000233746 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF11CC9928E189D000233746 /* AddView.swift */; };
 		BF11CCA028E19E3D00233746 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF11CC9F28E19E3D00233746 /* Persistence.swift */; };
 		BF49A5EF28E87E7700453424 /* IncomeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49A5EE28E87E7700453424 /* IncomeListViewModel.swift */; };
+		BF5BD90B28E99D340076342F /* DateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5BD90A28E99D340076342F /* DateInputView.swift */; };
+		BF5BD90D28E99D4F0076342F /* DateInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5BD90C28E99D4F0076342F /* DateInputViewModel.swift */; };
+		BF5BD91128E9A0190076342F /* TimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5BD91028E9A0190076342F /* TimeInputView.swift */; };
 		BFA3CFBF28E8692E0062ED4A /* IncomeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3CFBE28E8692E0062ED4A /* IncomeListView.swift */; };
 		BFA3CFC728E86A880062ED4A /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3CFC628E86A880062ED4A /* Income.swift */; };
 		BFA3CFC928E8708C0062ED4A /* IncomeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3CFC828E8708C0062ED4A /* IncomeListCell.swift */; };
@@ -26,6 +29,9 @@
 		BF11CC9928E189D000233746 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		BF11CC9F28E19E3D00233746 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BF49A5EE28E87E7700453424 /* IncomeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeListViewModel.swift; sourceTree = "<group>"; };
+		BF5BD90A28E99D340076342F /* DateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputView.swift; sourceTree = "<group>"; };
+		BF5BD90C28E99D4F0076342F /* DateInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputViewModel.swift; sourceTree = "<group>"; };
+		BF5BD91028E9A0190076342F /* TimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInputView.swift; sourceTree = "<group>"; };
 		BFA3CFBE28E8692E0062ED4A /* IncomeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeListView.swift; sourceTree = "<group>"; };
 		BFA3CFC628E86A880062ED4A /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		BFA3CFC828E8708C0062ED4A /* IncomeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeListCell.swift; sourceTree = "<group>"; };
@@ -64,19 +70,37 @@
 			isa = PBXGroup;
 			children = (
 				BF49A5EE28E87E7700453424 /* IncomeListViewModel.swift */,
+				BF5BD90C28E99D4F0076342F /* DateInputViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BF5BD90828E99CF40076342F /* IncomeList */ = {
+			isa = PBXGroup;
+			children = (
+				BFA3CFBE28E8692E0062ED4A /* IncomeListView.swift */,
+				BFA3CFCC28E877B80062ED4A /* IncomeDetailView.swift */,
+				BFA3CFC828E8708C0062ED4A /* IncomeListCell.swift */,
+			);
+			path = IncomeList;
+			sourceTree = "<group>";
+		};
+		BF5BD90928E99CFE0076342F /* IncomeCreation */ = {
+			isa = PBXGroup;
+			children = (
+				BF5BD90A28E99D340076342F /* DateInputView.swift */,
+				BF5BD91028E9A0190076342F /* TimeInputView.swift */,
+				BF11CC9928E189D000233746 /* AddView.swift */,
+			);
+			path = IncomeCreation;
 			sourceTree = "<group>";
 		};
 		BFA3CFC228E869650062ED4A /* View */ = {
 			isa = PBXGroup;
 			children = (
 				BFE31E1C28DF2A6400F76A15 /* OnBoardingView.swift */,
-				BFA3CFBE28E8692E0062ED4A /* IncomeListView.swift */,
-				BFA3CFCC28E877B80062ED4A /* IncomeDetailView.swift */,
-				BFA3CFC828E8708C0062ED4A /* IncomeListCell.swift */,
-				BF11CC9928E189D000233746 /* AddView.swift */,
-				BFE31E0E28DF24A100F76A15 /* ContentView.swift */,
+				BF5BD90828E99CF40076342F /* IncomeList */,
+				BF5BD90928E99CFE0076342F /* IncomeCreation */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -101,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				BFE31E0C28DF24A100F76A15 /* WeeklyIncomeApp.swift */,
+				BFE31E0E28DF24A100F76A15 /* ContentView.swift */,
 				BFA3CFC228E869650062ED4A /* View */,
 				BF49A5ED28E87E6400453424 /* ViewModel */,
 				BF11CC9E28E19E3300233746 /* Model */,
@@ -190,8 +215,11 @@
 			files = (
 				BFA3CFC928E8708C0062ED4A /* IncomeListCell.swift in Sources */,
 				BFA3CFCD28E877B80062ED4A /* IncomeDetailView.swift in Sources */,
+				BF5BD90B28E99D340076342F /* DateInputView.swift in Sources */,
 				BFE31E1D28DF2A6400F76A15 /* OnBoardingView.swift in Sources */,
 				BFF0560A28E2AF4B00C071DA /* WeeklyIncomeData.xcdatamodeld in Sources */,
+				BF5BD90D28E99D4F0076342F /* DateInputViewModel.swift in Sources */,
+				BF5BD91128E9A0190076342F /* TimeInputView.swift in Sources */,
 				BF11CCA028E19E3D00233746 /* Persistence.swift in Sources */,
 				BF11CC9A28E189D000233746 /* AddView.swift in Sources */,
 				BFA3CFC728E86A880062ED4A /* Income.swift in Sources */,

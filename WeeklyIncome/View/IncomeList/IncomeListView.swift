@@ -10,6 +10,7 @@ import SwiftUI
 struct IncomeListView: View {
     //MARK: - PROPERTIES
     @StateObject var vm : IncomeListViewModel
+    @State var isPresenting : Bool = false
     
     //MARK: - BODY
     var body: some View {
@@ -24,11 +25,15 @@ struct IncomeListView: View {
                                 NavigationLink {
                                     IncomeDetailView()
                                 } label: {
-                                    IncomeListCell(hourlyIncome: item)
+                                    IncomeListCell(incomeList: item)
                                 }
                             } //: LOOP
                         } header: {
                             Text(formattedSectionTitle(key))
+                                .frame(width: 300, height: 50)
+                                .background(Color.pink)
+                                .foregroundColor(.white)
+                                .cornerRadius(30)
                                 .font(.system(size: 30, weight: .black, design: .default))
                         } //: SECTION
                         .frame(height: 60)
@@ -38,6 +43,7 @@ struct IncomeListView: View {
                 
                 Button {
                     print("Plus Button Tapped")
+                    isPresenting = true
                 } label: {
                     Image(systemName: "plus")
                         .resizable()
@@ -48,11 +54,17 @@ struct IncomeListView: View {
                 .foregroundColor(.white)
                 .background(Color.pink)
                 .cornerRadius(40)
+                .padding(.vertical, 10)
 
             } //: VSTACK
             .navigationTitle("Monthly Income")
             .navigationBarTitleDisplayMode(.large)
         } //: NAVIGATION VIEW
+        .sheet(isPresented: $isPresenting) {
+            let vm = DateInputViewModel(isPresented: $isPresenting)
+            DateInputView(vm: vm)
+        }
+
         
     }
 }
